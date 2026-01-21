@@ -45,10 +45,26 @@ Date Date_FromString(char const description[]){
     return Date_Make(day,month, year, c=='j');
 }
 
+void Date_ToString(Date d, char text[], int capacity){
+    char c = d.cal_is_julian?'j':'g';
+    snprintf(text, capacity, "%d/%d/%d:%c", d.day, d.month, d.year, c);
+}
+
 int main(void) { 
     Date d = Date_Make(25, 12, 2000, false);
     printf("%d/%d/%d\n", d.day, d.month, d.year);
     printf("%scalendar\n", d.cal_is_julian? "julian ":"gregorian ");
+    
+
+    Date c= Date_FromString("3/2/2018:g");
+    printf("date is %d/%d/%d\n", c.day, c.month, c.year);
+    printf("calendar is %s\n", d.cal_is_julian?"julian":"georgian");
+    
+    Date e =Date_Epoch(true);
+    int const CAPACITY=100;
+    char text [CAPACITY];
+    Date_ToString(e, text, CAPACITY);
+    printf("date is %s\n", text);
     return 0;
 }
 
