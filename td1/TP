@@ -16,7 +16,9 @@ Date Date_Make ( int day , int month , int year , bool cal_is_julian ){
     };
 }
 
-Date Date_Epoch(bool cal_is)
+Date Date_Epoch(bool cal_is_julian){
+    return cal_is_julian?Date_Make(19,12;1969,true):Date_Make(01,01,1970,false);
+}
 
 int main ( void ) { 
     Date d = Date_Make (25 , 12 , 2000 , false );
