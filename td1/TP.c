@@ -50,6 +50,13 @@ void Date_ToString(Date d, char text[], int capacity){
     snprintf(text, capacity, "%d/%d/%d:%c", d.day, d.month, d.year, c);
 }
 
+char * Date_ToStaticString (Date d) {
+#define STATIC_TEXT_CAPACITY 100
+static char static_text [ STATIC_TEXT_CAPACITY ];
+Date_ToString (d , static_text , STATIC_TEXT_CAPACITY );
+return static_text ; // evaluates to & static_text [0] , the address of static_text []
+}
+
 int main(void) { 
     Date d = Date_Make(25, 12, 2000, false);
     printf("%d/%d/%d\n", d.day, d.month, d.year);
@@ -65,6 +72,10 @@ int main(void) {
     char text [CAPACITY];
     Date_ToString(e, text, CAPACITY);
     printf("date is %s\n", text);
+
+    Date d1 = Date_Epoch(true), d2 = Date_Epoch(false);
+    printf ("d1 is %s \n", Date_ToStaticString (d1));
+    printf ("d2 is %s \n", Date_ToStaticString (d2));
     return 0;
 }
 
