@@ -18,7 +18,7 @@ Date Date_Make(int day, int month, int year, bool cal_is_julian){
 }
 
 Date Date_Epoch(bool cal_is_julian){
-    return cal_is_julian?Date_Make(19,12;1969,true):Date_Make(01,01,1970,false);
+    return cal_is_julian?Date_Make(19,12,1969,true):Date_Make(01,01,1970,false);
 }
 
 bool Date_HasSameCal(Date d1, Date d2){
@@ -37,14 +37,20 @@ Date Date_Dummy(void){
     return Date_Make(0,0,0,false);
 }
 
+Date Date_FromString(char const description[]){
+    int day, month, year;
+    char c;
+    int x = sscanf(description, "%d/%d/%d:%c", &day, &month, &year, &c);
+    if((x!=4)||(c!='j' &&c!='g')){return Date_Dummy();}
+    return Date_Make(day,month, year, c=='j');
+}
 
 int main(void) { 
     Date d = Date_Make(25, 12, 2000, false);
     printf("%d/%d/%d\n", d.day, d.month, d.year);
-    printf("%scalendar\n", d.cal_is_julian? "julian":"gregorian");
+    printf("%scalendar\n", d.cal_is_julian? "julian ":"gregorian ");
     return 0;
 }
 
 
-//$ clang -W -Wall -std =c99 -pedantic TP.c -o TP
-//$ ./TP
+//clang -W -Wall -std=c99 -pedantic TP.c -o app1
