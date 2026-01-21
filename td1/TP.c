@@ -57,7 +57,8 @@ Date_ToString (d , static_text , STATIC_TEXT_CAPACITY );
 return static_text ; // evaluates to & static_text [0] , the address of static_text []
 }
 
-int main(void) { 
+
+/* int main(void) { 
     Date d = Date_Make(25, 12, 2000, false);
     printf("%d/%d/%d\n", d.day, d.month, d.year);
     printf("%scalendar\n", d.cal_is_julian? "julian ":"gregorian ");
@@ -77,7 +78,14 @@ int main(void) {
     printf ("d1 is %s \n", Date_ToStaticString (d1));
     printf ("d2 is %s \n", Date_ToStaticString (d2));
     return 0;
-}
+} */
 
+int main(int argc, char * argv[]){
+    printf("argc : %d\n", argc);
+    for (int k=0; k<argc; k++){
+        printf("argv[%d] : <%s\n", k, argv[k]);
+    }
+    printf(Date_ToStaticString(Date_Epoch(Date_FromString(argv).cal_is_julian)));
+}
 
 //clang -W -Wall -std=c99 -pedantic TP.c -o app1
